@@ -185,7 +185,11 @@ if (has_capability('local/recyclebin:empty', $coursecontext)) {
         'sesskey' => sesskey()
     ));
 
-    echo \html_writer::link($empty, get_string('empty', 'local_recyclebin'));
+    // START UCLA MOD CCLE-5280 - Improve Recycle Bin Appearance.
+    //echo \html_writer::link($empty, get_string('empty', 'local_recyclebin'));
+    echo \html_writer::link($empty, get_string('empty', 'local_recyclebin'),
+            array('id' => 'recycle-bin-empty-link'));
+    // END UCLA MOD CCLE-5280
 }
 
 // Output footer.
