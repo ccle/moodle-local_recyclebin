@@ -26,6 +26,11 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Recycle bin';
 $string['cleanrecyclebin'] = 'Clean recycle bin';
+// START UCLA MOD: CCLE-5298 - Recycle Bin Refinements
+$string['description'] = 'Items that have been deleted from a course can be restored and will appear at the bottom of the section from which they were deleted. Contents will be permanently deleted after '
+        . $CFG->forced_plugin_settings['local_recyclebin']['expiry'] . ' days.';
+$string['goback'] = 'Go back';
+// END UCLA MOD CCLE-5298
 
 $string['expiry'] = 'Item lifetime';
 $string['expiry_desc'] = 'How long should a deleted activity remain in the recycle bin?';
@@ -35,7 +40,11 @@ $string['autohide_desc'] = 'Automatically hides the recycle bin link when the bi
 
 $string['neverdelete'] = 'Never delete recycled items';
 $string['deleted'] = 'Date deleted';
-$string['empty'] = 'Empty recycle bin';
+// START UCLA MOD: CCLE-5298 - Recycle Bin Refinements
+// $string['empty'] = 'Empty recycle bin';
+$string['empty'] = 'Delete all';
+$string['emptyconfirm'] = 'Are you sure you want to delete the selected item(s) in the recycle bin?';
+// END UCLA MOD: CCLE-5298
 
 $string['recyclebin:view'] = 'View recycle bin items';
 $string['recyclebin:restore'] = 'Restore recycle bin items';
