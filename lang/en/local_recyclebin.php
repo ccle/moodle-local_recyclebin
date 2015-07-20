@@ -28,7 +28,7 @@ $string['pluginname'] = 'Recycle bin';
 $string['cleanrecyclebin'] = 'Clean recycle bin';
 // START UCLA MOD: CCLE-5298 - Recycle Bin Refinements
 $string['description'] = 'Items that have been deleted from a course can be restored and will appear at the bottom of the section from which they were deleted. Contents will be permanently deleted after '
-        . $CFG->forced_plugin_settings['local_recyclebin']['expiry'] . ' days.';
+        . get_config('local_recyclebin', 'expiry') . ' days.';
 $string['goback'] = 'Go back';
 // END UCLA MOD CCLE-5298
 

@@ -76,6 +76,7 @@ if (!empty($action)) {
     }
 }
 
+
 // Output header.
 echo $OUTPUT->header();
 echo $OUTPUT->heading($PAGE->title);
