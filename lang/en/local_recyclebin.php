@@ -35,7 +35,11 @@ $string['autohide_desc'] = 'Automatically hides the recycle bin link when the bi
 
 $string['neverdelete'] = 'Never delete recycled items';
 $string['deleted'] = 'Date deleted';
-$string['empty'] = 'Empty recycle bin';
+// START UCLA MOD: CCLE-5298 - Recycle Bin Refinements
+// $string['empty'] = 'Empty recycle bin';
+$string['empty'] = 'Delete all';
+$string['goback'] = 'Go back';
+// END UCLA MOD: CCLE-5298
 
 $string['recyclebin:view'] = 'View recycle bin items';
 $string['recyclebin:restore'] = 'Restore recycle bin items';

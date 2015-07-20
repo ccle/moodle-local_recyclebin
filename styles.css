@@ -1,5 +1,3 @@
-/* START UCLA MOD CCLE-5280 - Improve Recycle Bin Appearance. */
-
 /* Space out the table a bit */
 table#recycle-bin-table {
     margin: 1.5em 0;
@@ -8,26 +6,22 @@ table#recycle-bin-table {
 /* Add padding to, change font size, and align the table cells. */
 table#recycle-bin-table > thead > tr > th,
 table#recycle-bin-table > tbody > tr > td {
-    padding: 0.8em;
-    font-size: 1.0625em;
+    padding: 1em;
+    font-size: 1.125em;
     vertical-align: center;
+}
+
+table#recycle-bin-table img {
+    height: 1em;
 }
 
 /* Make the icons look larger. */
 table#recycle-bin-table > tbody > tr > .c2,
 table#recycle-bin-table > tbody > tr > .c3 {
-    padding: 0.125em;
-    font-size: 2em;
     text-align: center;
+    vertical-align: middle;
 }
-
-/* Make the link look like a button. */
-#recycle-bin-empty-link {
-    border-radius: 0.25em;
-    padding: 0.4em;
-    color: #FFF !important;
-    background-color: #536895;
-    font-size: 1.4em;
+table#recycle-bin-table .iconsmall {
+    height: 1em !important;
+    width: 1em !important;
 }
-
-/* END UCLA MOD CCLE-5280 */
