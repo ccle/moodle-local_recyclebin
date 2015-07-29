@@ -60,3 +60,16 @@ Feature: Restoring an assignment from bin.
     And I wait to be redirected
     Then I should see "Assignment to restore" in the "Topic 1" "section"
     And I should see "Another assignment to restore" in the "Topic 1" "section"
+    Given I delete "Assignment to restore" activity
+    And I delete "Another assignment to restore" activity
+    Then I should not see "Assignment to restore" in the "Topic 1" "section"
+    And I should not see "Another assignment to restore" in the "Topic 1" "section"
+    Given I reload the page
+    And I follow "Recycle bin"
+    Then I should see "Assignment to restore"
+    And I should see "Another assignment to restore"
+    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
+    Given I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
+    And I wait to be redirected
+    Then I should not see "Assignment to restore" in the "Topic 1" "section"
+    And I should not see "Another assignment to restore" in the "Topic 1" "section"
