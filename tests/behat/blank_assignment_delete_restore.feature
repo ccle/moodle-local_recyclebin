@@ -16,6 +16,7 @@ Feature: Restoring an assignment from bin.
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
+    And I set the private config setting "forced_plugin_settings['backup']['backup_general_groups']" to "0";
 
   @javascript
   Scenario: Make sure we can restore a blank assignment.
@@ -97,7 +98,6 @@ Feature: Restoring an assignment from bin.
     And I follow "Recycle bin"
     Then I should see "Assignment to be gone"
     Then I should see "Assignment to stay"
-    #And I put a breakpoint
     Given I click on "//tr[contains(., \"Assignment to be gone\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
     And I wait to be redirected
     Then I should not see "Assignment to be gone"
