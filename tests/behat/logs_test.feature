@@ -36,5 +36,4 @@ Feature: Restoring an assignment from bin.
     Given I log in as "admin"
     And I navigate to "Logs" node in "Site administration > Reports"
     And I click on "Get these logs" "link_or_button"
-    And I put a breakpoint
     Then "//tr[contains(., \"Course 1\") and contains(., \"Recycle bin\") and contains(., \"Item restored\")]" "xpath_element" should be visible
