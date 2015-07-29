@@ -15,26 +15,26 @@ Feature: Restoring an assignment from bin.
       | user | course | role |
       | teacher1 | C1 | editingteacher |
 
-#  @javascript
-#  Scenario: Make sure we can restore a blank assignment.
-#    Given I log in as "teacher1"
-#    And I follow "Course 1"
-#    And I turn editing mode on
-#    And I add a "Assignment" to section "1" and I fill the form with:
-#      | Assignment name | Assignment to restore |
-#      | Description | I'll be back. |
-#    Then I should see "Assignment to restore" in the "Topic 1" "section"
-#    Given I delete "Assignment to restore" activity
-#    Then I should not see "Assignment to restore" in the "Topic 1" "section"
-#    Given I reload the page
-#    And I follow "Recycle bin"
-#    Then I should see "Assignment to restore"
-#    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
-#    And I wait to be redirected
-#    Then I should see "Assignment to restore" in the "Topic 1" "section"
+  @javascript
+  Scenario: Make sure we can restore a blank assignment.
+    Given I log in as "teacher1"
+    And I follow "Course 1"
+    And I turn editing mode on
+    And I add a "Assignment" to section "1" and I fill the form with:
+      | Assignment name | Assignment to restore |
+      | Description | I'll be back. |
+    Then I should see "Assignment to restore" in the "Topic 1" "section"
+    Given I delete "Assignment to restore" activity
+    Then I should not see "Assignment to restore" in the "Topic 1" "section"
+    Given I reload the page
+    And I follow "Recycle bin"
+    Then I should see "Assignment to restore"
+    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
+    And I wait to be redirected
+    Then I should see "Assignment to restore" in the "Topic 1" "section"
 
   @javascript
-  Scenario: Make sure we can restore multiple assignments/
+  Scenario: Make sure we can restore multiple assignments
     Given I log in as "teacher1"
     And I follow "Course 1"
     And I turn editing mode on
@@ -73,3 +73,29 @@ Feature: Restoring an assignment from bin.
     And I wait to be redirected
     Then I should not see "Assignment to restore" in the "Topic 1" "section"
     And I should not see "Another assignment to restore" in the "Topic 1" "section"
+
+  @javascript
+  Scenario: Empty recyclebin.
+    Given I log in as "teacher1"
+    And I follow "Course 1"
+    And I turn editing mode on
+    And I add a "Assignment" to section "1" and I fill the form with:
+      | Assignment name | Assignment to restore |
+      | Description | I'll be back. |
+    Then I should see "Assignment to restore" in the "Topic 1" "section"
+    And I add a "Assignment" to section "1" and I fill the form with:
+      | Assignment name | Another assignment to restore |
+      | Description | I'll be back too. |
+    Then I should see "Assignment to restore" in the "Topic 1" "section"
+    And I should see "Another assignment to restore" in the "Topic 1" "section"
+    Given I delete "Assignment to restore" activity
+    And I delete "Another assignment to restore" activity
+    Then I should not see "Assignment to restore" in the "Topic 1" "section"
+    And I should not see "Another assignment to restore" in the "Topic 1" "section"
+    Given I reload the page
+    And I follow "Recycle bin"
+    Then I should see "Assignment to restore"
+    And I should see "Another assignment to restore"
+    Given I click on "Empty recycle bin" "link_or_button"
+    Then I should not see "Assignment to restore"
+    And I should not see "Another assignment to restore"
