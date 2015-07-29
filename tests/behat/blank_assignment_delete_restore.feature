@@ -80,4 +80,3 @@ Feature: Restoring an assignment from bin.
     And I should see "Content will be restored to the bottom of the section from which it was originally deleted."
     And I should not see "Empty Recycle Bin"
     And I should see "Delete all"
-
