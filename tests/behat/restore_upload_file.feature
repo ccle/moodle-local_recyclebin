@@ -1,6 +1,6 @@
 @ucla @local_recyclebin @CCLE-5321
 Feature: restore uploaded file
-  update a file, delete it
+  upload a file, delete it
   and restore it from recycle bin
 
   Background: Course with teacher exists.
@@ -20,7 +20,8 @@ Scenario: restore file uploaded
      Given I log in as "teacher1"
       And I follow "Course 1"
       And I turn editing mode on
-    Given I add a "File" to section "1" and I fill the form with:
+    Given I add a "File" to section "1"
+    Given I set the following fields to these values:
       | Name | Test file with recycle bin |
       | Description | file to be restore |
     And I upload "local/recyclebin/tests/behat/restore_upload_file.feature" file to "Select files" filemanager
