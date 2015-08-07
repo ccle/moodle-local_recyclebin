@@ -15,10 +15,7 @@ Feature: Restoring an assignment from bin.
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | C1 | editingteacher |
-      | student1 | C1 | student |
-#    And I set the private config setting "forced_plugin_settings['backup']['backup_general_groups']" to "0"
 
-  @javascript
   Scenario: Basic recycle bin functionality
     Given I log in as "teacher1"
     And I follow "Course 1"
@@ -29,15 +26,19 @@ Feature: Restoring an assignment from bin.
     And I add a "Assignment" to section "1" and I fill the form with:
       | Assignment name | Another assignment to restore |
       | Description | I'll be back too. |
-    And I should see "Recycle bin"
+    Then I should see "Recycle bin"
     When I delete "Assignment to restore" activity
     And I delete "Another assignment to restore" activity
     And I follow "Recycle bin"
     Then I should see "Assignment to restore"
     And I should see "Another assignment to restore"
     When I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
+    Then I should see "Assignment to restore has been restored"
+    When I wait to be redirected
     And I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
-    And I click on "Go back" "link_or_button"
+    Then I should see "Another assignment to restore has been restored"
+    When I wait to be redirected
+    And I follow "Go back"
     Then I should see "Assignment to restore" in the "Topic 1" "section"
     And I should see "Another assignment to restore" in the "Topic 1" "section"
     When I delete "Assignment to restore" activity
@@ -46,7 +47,11 @@ Feature: Restoring an assignment from bin.
     Then I should see "Assignment to restore"
     And I should see "Another assignment to restore"
     When I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
+    Then I should see "Assignment to restore has been deleted"
+    When I wait to be redirected
     And I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
-    And I click on "Go back" "link_or_button"
+    Then I should see "Another assignment to restore has been deleted"
+    When I wait to be redirected
+    And I follow "Go back"
     Then I should not see "Assignment to restore" in the "Topic 1" "section"
     And I should not see "Another assignment to restore" in the "Topic 1" "section"

@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321 @CCLE-5333
+@ucla @local_recyclebin @CCLE-5321 @CCLE-5334
   Feature: restore multiple modules.
 
   Background: Course with teacher and student exist.
@@ -14,7 +14,6 @@
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
-
 
   @javascript
   Scenario: Delete and restore different types of modules.
