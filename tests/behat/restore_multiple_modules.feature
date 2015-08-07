@@ -75,7 +75,7 @@
     Given I set the following fields to these values:
       | Name | Test file with recycle bin |
       | Description | file to be restore |
-    And I upload "local/recyclebin/tests/behat/restore_upload_file.feature" file to "Select files" filemanager
+    And I upload "local/recyclebin/tests/behat/restore_multiple_modules.feature" file to "Select files" filemanager
     And I press "Save and return to course"
     Then I should see "Test file with recycle bin" in the "Topic 1" "section"
     Given I delete "Test file with recycle bin" activity
@@ -87,7 +87,7 @@
     And I wait to be redirected
     Given I follow "Go back"
     Then I should see "Test file with recycle bin" in the "Topic 1" "section"
-    Then following "Test file with recycle bin" should download between "1500" and "2000" bytes
+    Then following "Test file with recycle bin" should download between "6000" and "6500" bytes
 
     @javascript
     Scenario: restore folder with two files
@@ -98,13 +98,13 @@
     Given I set the following fields to these values: 
       | Name | Test Folder to be restore |
       | Description | This is a folder to be restore |
-    And I upload "local/recyclebin/tests/behat/restore_upload_file.feature" file to "Files" filemanager
-    And I upload "local/recyclebin/tests/behat/restore_folder.feature" file to "Files" filemanager
+    And I upload "local/recyclebin/tests/behat/restore_multiple_modules.feature" file to "Files" filemanager
+    And I upload "local/recyclebin/tests/behat/blank_assignment_delete_restore.feature" file to "Files" filemanager
     Then I press "Save and return to course"
     Then I should see "Test Folder to be restore" in the "Topic 1" "section"
     When I click on "Test Folder to be restore" "link_or_button"
-    Then I should see "restore_folder.feature"
-    And I should see "restore_upload_file.feature"
+    Then I should see "restore_multiple_modules.feature"
+    And I should see "blank_assignment_delete_restore.feature"
     And I follow "Course 1"
     Given I delete "Test Folder to be restore" activity
     Then I should not see "Test Folder to be restore" in the "Topic 1" "section"
@@ -116,5 +116,5 @@
     Given I follow "Go back"
     Then I should see "Test Folder to be restore" in the "Topic 1" "section"
     When I click on "Test Folder to be restore" "link_or_button"
-    Then following "restore_upload_file.feature" should download between "1500" and "2000" bytes
-    Then following "restore_folder.feature" should download between "2000" and "2500" bytes
+    Then following "restore_multiple_modules.feature" should download between "6000" and "6500" bytes
+    Then following "blank_assignment_delete_restore.feature" should download between "2500" and "3000" bytes
