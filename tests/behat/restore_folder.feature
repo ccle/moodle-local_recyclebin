@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321
+@ucla @local_recyclebin @CCLE-5334 @CCLE-5321
 Feature: restore folder
   create a folder with two files, delete the folder
   and restore it from recycle bin

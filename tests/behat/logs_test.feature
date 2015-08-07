@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321
+@ucla @local_recyclebin @CCLE-5321 @CCLE-5335
 Feature: Restoring an assignment from bin.
   create a blank assignment, delete it,
   and restore it from the bin.
