@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-@ucla @local_recyclebin @CCLE-5321 @fan
-=======
-@ucla @local_recyclebin @CCLE-5321
->>>>>>> CCLE-5321 : 5335 - Added check for logs that reflect restored modules.
-=======
 @ucla @local_recyclebin @CCLE-5321 @CCLE-5335
->>>>>>> CCLE-5321 *Added the sub-tak Refinements tests and reorganized the basic test file.
 Feature: Restoring an assignment from bin.
   create a blank assignment, delete it,
   and restore it from the bin.
