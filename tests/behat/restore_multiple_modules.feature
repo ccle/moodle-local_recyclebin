@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321 @CCLE-5333 @ha999
+@ucla @local_recyclebin @CCLE-5321 @CCLE-5333
   Feature: restore multiple modules.
 
   Background: Course with teacher and student exist.
@@ -119,4 +119,3 @@
     When I click on "Test Folder to be restore" "link_or_button"
     Then following "restore_upload_file.feature" should download between "1500" and "2000" bytes
     Then following "restore_folder.feature" should download between "2000" and "2500" bytes
-
