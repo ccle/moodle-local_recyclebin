@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321
+@ucla @local_recyclebin @CCLE-5321 @CCLE-5333
 Feature: Restoring an assignment from bin.
   create a blank assignment, delete it,
   and restore it from the bin.
@@ -16,119 +16,40 @@ Feature: Restoring an assignment from bin.
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
-    And I set the private config setting "forced_plugin_settings['backup']['backup_general_groups']" to "0";
+#    And I set the private config setting "forced_plugin_settings['backup']['backup_general_groups']" to "0"
 
   @javascript
-  Scenario: Make sure we can restore a blank assignment.
+  Scenario: Basic recycle bin functionality
     Given I log in as "teacher1"
     And I follow "Course 1"
     And I turn editing mode on
-    And I add a "Assignment" to section "1" and I fill the form with:
+    When I add a "Assignment" to section "1" and I fill the form with:
       | Assignment name | Assignment to restore |
       | Description | I'll be back. |
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
-    Given I delete "Assignment to restore" activity
-    Then I should not see "Assignment to restore" in the "Topic 1" "section"
-    Given I reload the page
-    And I follow "Recycle bin"
-    Then I should see "Assignment to restore"
-    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
-    And I wait to be redirected
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
-
-  @javascript
-  Scenario: Make sure we can restore multiple assignments.
-    Given I log in as "teacher1"
-    And I follow "Course 1"
-    And I turn editing mode on
-    And I add a "Assignment" to section "1" and I fill the form with:
-      | Assignment name | Assignment to restore |
-      | Description | I'll be back. |
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
     And I add a "Assignment" to section "1" and I fill the form with:
       | Assignment name | Another assignment to restore |
       | Description | I'll be back too. |
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
-    And I should see "Another assignment to restore" in the "Topic 1" "section"
     And I should see "Recycle bin"
-    Given I delete "Assignment to restore" activity
+    When I delete "Assignment to restore" activity
     And I delete "Another assignment to restore" activity
-    Then I should not see "Assignment to restore" in the "Topic 1" "section"
-    And I should not see "Another assignment to restore" in the "Topic 1" "section"
-    Given I reload the page
     And I follow "Recycle bin"
     Then I should see "Assignment to restore"
     And I should see "Another assignment to restore"
-    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
-    Given I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
-    And I wait to be redirected
+    When I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
+    And I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
+    And I click on "Go back" "link_or_button"
     Then I should see "Assignment to restore" in the "Topic 1" "section"
     And I should see "Another assignment to restore" in the "Topic 1" "section"
-    Given I delete "Assignment to restore" activity
+    When I delete "Assignment to restore" activity
     And I delete "Another assignment to restore" activity
-    Then I should not see "Assignment to restore" in the "Topic 1" "section"
-    And I should not see "Another assignment to restore" in the "Topic 1" "section"
-    Given I reload the page
     And I follow "Recycle bin"
     Then I should see "Assignment to restore"
     And I should see "Another assignment to restore"
-    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
-    Given I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
-    And I wait to be redirected
+    When I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
+    And I click on "//tr[contains(., \"Another assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
+    And I click on "Go back" "link_or_button"
     Then I should not see "Assignment to restore" in the "Topic 1" "section"
     And I should not see "Another assignment to restore" in the "Topic 1" "section"
-
-  @javascript 
-  Scenario: delete items from recycle bin.
-  Given I log in as "teacher1"
-    And I follow "Course 1"
-    And I turn editing mode on
-    And I add a "Assignment" to section "1" and I fill the form with:
-      | Assignment name | Assignment to be gone |
-      | Description | I'll be gone! |
-    Then I should see "Assignment to be gone" in the "Topic 1" "section"
-    And I add a "Assignment" to section "1" and I fill the form with:
-      | Assignment name | Assignment to stay |
-      | Description | I'll stay. |
-    Then I should see "Assignment to stay" in the "Topic 1" "section"
-    Given I delete "Assignment to be gone" activity
-    And I delete "Assignment to stay" activity
-    Then I should not see "Assignment to be gone" in the "Topic 1" "section"
-    Then I should not see "Assignment to stay" in the "Topic 1" "section"
-    Given I reload the page
-    And I follow "Recycle bin"
-    Then I should see "Assignment to be gone"
-    Then I should see "Assignment to stay"
-    Given I click on "//tr[contains(., \"Assignment to be gone\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Delete\"]" "xpath_element"
-    And I wait to be redirected
-    Then I should not see "Assignment to be gone"
-    And I should see "Assignment to stay"
-
-  @javascript
-  Scenario: Empty recyclebin.
-    Given I log in as "teacher1"
-    And I follow "Course 1"
-    And I turn editing mode on
-    And I add a "Assignment" to section "1" and I fill the form with:
-      | Assignment name | Assignment to restore |
-      | Description | I'll be back. |
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
-    And I add a "Assignment" to section "1" and I fill the form with:
-      | Assignment name | Another assignment to restore |
-      | Description | I'll be back too. |
-    Then I should see "Assignment to restore" in the "Topic 1" "section"
-    And I should see "Another assignment to restore" in the "Topic 1" "section"
-    Given I delete "Assignment to restore" activity
-    And I delete "Another assignment to restore" activity
-    Then I should not see "Assignment to restore" in the "Topic 1" "section"
-    And I should not see "Another assignment to restore" in the "Topic 1" "section"
-    Given I reload the page
-    And I follow "Recycle bin"
-    Then I should see "Assignment to restore"
-    And I should see "Another assignment to restore"
-    Given I click on "Empty recycle bin" "link_or_button"
-    Then I should not see "Assignment to restore"
-    And I should not see "Another assignment to restore"
 
   @javascript
   Scenario: Delete and restore different types of modules.

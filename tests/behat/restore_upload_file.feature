@@ -1,4 +1,4 @@
-@ucla @local_recyclebin @CCLE-5321
+@ucla @local_recyclebin @CCLE-5321 @CCLE-5334
 Feature: restore uploaded file
   upload a file, delete it
   and restore it from recycle bin
