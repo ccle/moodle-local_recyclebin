@@ -1,11 +1,10 @@
 @ucla @local_recyclebin @CCLE-5321 @CCLE-5335
-Feature: Restoring an assignment from bin.
-  create a blank assignment, delete it,
-  and restore it from the bin.
+Feature: Recycle bin refinements
+  As an administrator
+  I want the log to reflect the recycle bin's actions
 
   Background: Course with teacher exists.
-    Given I am in a ucla environment
-    And the following "users" exist:
+    Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher@asd.com |
     And the following "courses" exist:
@@ -14,22 +13,21 @@ Feature: Restoring an assignment from bin.
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | C1 | editingteacher |
-
-  @javascript
-  Scenario: Make sure we can restore a blank assignment.
+  
+  Scenario: Make sure the recycle bin is logging.
     Given I log in as "teacher1"
     And I follow "Course 1"
     And I turn editing mode on
     And I add a "Assignment" to section "1" and I fill the form with:
       | Assignment name | Assignment to restore |
       | Description | I'll be back. |
-    Given I delete "Assignment to restore" activity
-    Given I reload the page
+    And I delete "Assignment to restore" activity
     And I follow "Recycle bin"
-    Given I click on "//tr[contains(., \"Assignment to restore\")]/td[starts-with(@id, \"recyclebin\")]/a[@alt=\"Restore\"]" "xpath_element"
+    And I follow "Delete" 
     And I wait to be redirected
-    Then I log out
-    Given I log in as "admin"
-    And I navigate to "Logs" node in "Site administration > Reports"
+    And I log out
+    And I log in as "admin"
+    And I follow "Course 1"
+    And I follow "Logs"  
     And I click on "Get these logs" "link_or_button"
-    Then "//tr[contains(., \"Course 1\") and contains(., \"Recycle bin\") and contains(., \"Item restored\")]" "xpath_element" should be visible
+    Then I should see "Item purged" in the "Recycle bin" "table_row"

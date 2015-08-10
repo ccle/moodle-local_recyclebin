@@ -32,7 +32,7 @@ M.local_recyclebin = {
         }
 
         // Perform this action when any "Delete" button/link is clicked.
-        Y.all('.recycle-bin-delete').on('click', confirmDelete);
+        Y.all('table#recycle-bin-table .c2 a').on('click', confirmDelete);
 
         // Find the "Delete All" button and perform an action when it is clicked.
         Y.one('.recycle-bin-delete-all').on('click', confirmDelete);

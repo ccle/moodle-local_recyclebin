@@ -207,7 +207,6 @@ foreach ($items as $item) {
             'sesskey' => sesskey()
         ));
         $delete = $OUTPUT->action_icon($delete, new pix_icon('t/delete', get_string('delete'), '', array('class' => 'iconsmall')));
-
         $row[] = $delete;
     }
 
