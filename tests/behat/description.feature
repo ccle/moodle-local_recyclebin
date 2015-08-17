@@ -5,11 +5,16 @@ Feature: Description of recycle bin and expiry
     So that I can better understand the tool
 
 Scenario: Description should show when the recycle bin will clean up files.
+    Given the following "users" exist:
+        | username | firstname | lastname | email |
+        | teacher1 | Teacher | 1 | teacher@asd.com |
     Given the following "courses" exist:
         | fullname | shortname |
         | Course 1 | C1 |
-    And I log in as "admin"
-    And I am on site homepage
+    And the following "course enrolments" exist:
+        | user | course | role |
+        | teacher1 | C1 | editingteacher |
+    And I log in as "teacher1"
     And I follow "Course 1"
     And I turn editing mode on
     And I add a "Page" to section "1" and I fill the form with:
